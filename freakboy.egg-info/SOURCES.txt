@@ -1,0 +1,6 @@
+freakboy/__init__.py
+freakboy.egg-info/PKG-INFO
+freakboy.egg-info/SOURCES.txt
+freakboy.egg-info/dependency_links.txt
+freakboy.egg-info/requires.txt
+freakboy.egg-info/top_level.txt
