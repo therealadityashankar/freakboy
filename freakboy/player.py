@@ -103,11 +103,10 @@ class Player:
         """plays audio"""
         audio = self.get_audio()
         pyaudio_format = pyaudio.get_format_from_width(audio['sample_width'])
-        stream = self.pyaudio_ins.open(rate=audio['sample_rate'],
+
                                        channels=audio['channels'],
                                        format=pyaudio_format,
                                        output=True)
-        stream.write(audio['recording_values'])
         stream.close()
 
     def close(self):
@@ -170,7 +169,6 @@ class AudioData:
         self.channels = channels
         self.sampling_rate = sampling_rate
         self.key_play_style = defs.mexp
-        
         # checks
         self.check_sample_width()
 
@@ -202,7 +200,7 @@ class AudioData:
             return numpy.int16
 
         else:
-            raise Error('only a samplw width of 2 is currently supported')
+            raise Error('only a sample width of 2 is currently supported')
 
     def add_data(self, data):
         """adds data to this audio_data chunk

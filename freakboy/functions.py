@@ -73,8 +73,10 @@ def data_for_freq(
                 a number between 0 and 1 determining the amplitude
     """
     wavedata = []
+
     frequency_callable = callable(frequency)
     amplitude_callable = callable(amplitude)
+
     for i in range(frame_count):
         position_in_frames = i / frame_count
         if frequency_callable:
@@ -89,14 +91,15 @@ def data_for_freq(
                 displacement = square(position_in_wave)
             else:
                 raise Error("invalid wave type :" + wave_type)
-            displacement = displacement * 32767
-            if amplitude_callable:
-                displacement = displacement * amplitude(position_in_frames)
-            else:
-                displacement = displacement * amplitude
-            displacement = int(displacement)
-            for _ in range(number_of_channels):
-                wavedata.append(displacement)
+
+        displacement = displacement * 32767
+        if amplitude_callable:
+            displacement = displacement * amplitude(position_in_frames)
+        else:
+            displacement = displacement * amplitude
+        displacement = int(displacement)
+        for _ in range(number_of_channels):
+            wavedata.append(displacement)
 
     return wavedata
 
