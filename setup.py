@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
 from setuptools import setup
-from Cython.Build import cythonize
 
 setup(
     name='freakboy',
@@ -9,6 +7,5 @@ setup(
     author='Aditya Shankar',
     author_email='aditniru@gmail.com',
     packages=['freakboy'],
-    install_requires=['pyaudio'],
-    ext_modules=cythonize("freakboy/*.pyx")
+    install_requires=['pyaudio']
 )
