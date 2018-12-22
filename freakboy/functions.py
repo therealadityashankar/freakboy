@@ -81,22 +81,24 @@ def data_for_freq(
             frames_per_wave = sampling_rate / frequency(position_in_frames)
         else:
             frames_per_wave = sampling_rate / frequency
+
         position_in_wave = i / frames_per_wave
+
         if wave_type == "sine":
             displacement = msin(position_in_wave)
+        elif wave_type == "square":
+            displacement = square(position_in_wave)
         else:
-            if wave_type == "square":
-                displacement = square(position_in_wave)
-            else:
-                raise Error("invalid wave type :" + wave_type)
-            displacement = displacement * 32767
-            if amplitude_callable:
-                displacement = displacement * amplitude(position_in_frames)
-            else:
-                displacement = displacement * amplitude
-            displacement = int(displacement)
-            for _ in range(number_of_channels):
-                wavedata.append(displacement)
+            raise Error("invalid wave type :" + wave_type)
+
+        displacement = displacement * 32767
+        if amplitude_callable:
+            displacement = displacement * amplitude(position_in_frames)
+        else:
+            displacement = displacement * amplitude
+        displacement = int(displacement)
+        for _ in range(number_of_channels):
+            wavedata.append(displacement)
 
     return wavedata
 
